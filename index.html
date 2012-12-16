@@ -1,0 +1,48 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>ReCo</title>
+
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
+
+<link rel="stylesheet" href="//twitter.github.com/bootstrap/assets/css/bootstrap.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Sans">
+<link rel="stylesheet" href="//www.gstatic.com/freebase/suggest/4_1/suggest.min.css">
+<link rel="stylesheet" href="app.css">
+
+<link href="images/icon.png" rel="icon" sizes="60x60">
+<link href="images/icon.png" rel="apple-touch-icon">
+
+<div class="container">
+	<div class="hero-unit">
+		<h1><img src="images/icon.png">ReCo</h1>
+
+		<p class="description">Create a Spotify playlist of tracks related to the artists you choose.</p>
+
+		<form id="input">
+			<button type="button" class="btn btn-primary" id="add-button"><i class="icon-white icon-plus-sign"></i> Add an artist</button>
+
+			<button type="submit" class="btn btn-success" id="generate-button">Generate Playlist</button>
+			<a href="./" class="btn btn-warning" id="reset-button">Reset</a>
+		</form>
+
+		<div class="row-fluid">
+			<div class="span8" id="playlist"></div>
+			<div class="span4" id="artists"></div>
+		</div>
+	</div>
+
+	<div class="row-fluid" id="colophon">
+		<div class="span4"><a href="http://the.echonest.com/"><img src="images/echonest-logo.png"></a></div>
+		<div class="span4"><a href="http://spotify.com/"><img src="images/spotify-logo.png"></a></div>
+		<div class="span4"><a href="http://www.freebase.com/"><img src="http://attribution.freebaseapps.com/freebase-attribution.png" alt="Freebase CC-BY"></a></div>
+	</div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script src="//www.gstatic.com/freebase/suggest/4_1/suggest.min.js"></script>
+<script src="app.js"></script>
+

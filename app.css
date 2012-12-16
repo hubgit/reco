@@ -1,0 +1,66 @@
+body {
+	font-family:"Droid Sans",sans-serif;
+	background-color:#fff
+}
+
+input {
+	font-family:"Droid Sans",sans-serif
+}
+
+a img {
+	border:none
+}
+
+h1 img {
+	vertical-align: top;
+}
+
+p.description {
+	color:#444;
+	font-size:80%
+}
+
+.hero-unit {
+	padding: 20px 40px;
+	margin: 20px auto;
+	background: transparent;
+}
+
+.error {
+	color:red;
+	outline:1px solid red
+}
+
+#default {
+	display:none!important
+}
+
+#input input[name='artist'] {
+	width:20em
+}
+
+#artists div {
+	margin-bottom: 5px;
+}
+
+#artists, #generate-button, #reset-button {
+	display: none;
+}
+
+.remove-artist {
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+.has-playlist #artists {
+	display: block;
+}
+
+.has-artists #generate-button,
+.has-artists #reset-button {
+	display: inline-block;
+}
+
+#colophon {
+	text-align: center;
+}
