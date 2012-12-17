@@ -9,8 +9,7 @@ $(function() {
 
   var addArtistInput = function(focus){
     if ($("#input [name=artist]").length === 5) {
-      alert("Up to 5 artists can be used as seeds - remove some before adding more!");
-      return false;
+      $("#input [name=artist]:first").closest("div").remove();
     }
 
     var input = $("<input/>", { type: "text", name: "artist" })
