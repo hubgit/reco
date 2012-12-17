@@ -26,7 +26,7 @@ $(function() {
     }
 
     var remove = $("<button/>", { type: "button" })
-      .addClass("remove-artist btn btn-danger btn-mini")
+      .addClass("remove-artist btn btn-danger")
       .append("<i class='icon-white icon-minus-sign'></i>")
       .insertAfter(input);
 
@@ -112,7 +112,7 @@ $(function() {
     if (tracks.length) {
       var trackSet = tracks.join(",");
 
-      $("<iframe/>", { src: "https://embed.spotify.com/?uri=spotify:trackset:ReCo:" + trackSet, frameborder: "0", allowtransparency: "true", height: 720, width: 480 }).appendTo("#playlist");
+      $("<iframe/>", { src: "https://embed.spotify.com/?uri=spotify:trackset:ReCo:" + trackSet, frameborder: "0", allowtransparency: "true", height: 720, width: 320 }).appendTo("#playlist");
     }
 
     $("#artists").empty();
@@ -120,10 +120,9 @@ $(function() {
     if (artists.length) {
       $.each($.unique(artists), function(index, artist) {
         $("<button/>", { type: "button", text: artist })
-          .addClass("artist-name btn btn-primary")
+          .addClass("artist-name btn btn-mini btn-primary")
           .prepend("<i class='icon-white icon-plus-sign'></i> ")
-          .appendTo("#artists")
-          .wrap("<div/>");
+          .appendTo("#artists");
       });
 
       $("#artists").show();

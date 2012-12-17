@@ -15,14 +15,19 @@ h1 img {
 	vertical-align: top;
 }
 
+.container {
+	margin: 0;
+	width: 410px;
+}
+
 p.description {
 	color:#444;
 	font-size:80%
 }
 
 .hero-unit {
-	padding: 20px 40px;
-	margin: 20px auto;
+	padding: 10px 20px;
+	margin: 0;
 	background: transparent;
 }
 
@@ -39,8 +44,12 @@ p.description {
 	width:20em
 }
 
-#artists div {
-	margin-bottom: 5px;
+#artists .artist-name {
+	margin: 0 5px 5px 0;
+}
+
+#artists {
+	margin-bottom: 20px;
 }
 
 #artists, #generate-button, #reset-button {
@@ -59,8 +68,4 @@ p.description {
 .has-artists #generate-button,
 .has-artists #reset-button {
 	display: inline-block;
-}
-
-#colophon {
-	text-align: center;
 }
