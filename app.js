@@ -32,6 +32,19 @@ $(function() {
     return input;
   };
 
+  var getArtistNames = function() {
+    var artistNames = [];
+
+    $("#input input[name=artist]").each(function(i){
+      var artistName = $(this).val();
+      if (artistName){
+        artistNames.push(artistName);
+      }
+    });
+
+    return artistNames;
+  };
+
   var generatePlaylist = function(event){
     if (event) {
       event.preventDefault();
@@ -43,15 +56,7 @@ $(function() {
     inputs.css("outline-color", "black");
 
     var artists = [];
-    var artistNames = [];
-    var artistName;
-
-    inputs.each(function(i){
-      var artistName = $(this).val();
-       if (artistName){
-         artistNames.push(artistName);
-       }
-    });
+    var artistNames = getArtistNames();
 
     if (!artistNames.length){
       alert("Enter some artist names first!");
@@ -117,7 +122,17 @@ $(function() {
     $("#artists").empty();
 
     if (artists.length) {
-      $.each($.unique(artists), function(index, artist) {
+      var uniqueArtists = artists.filter(function(item, index){
+          return index == artists.indexOf(item);
+      });
+
+      var usedArtists = getArtistNames();
+
+      var unusedArtists = uniqueArtists.filter(function(item) {
+        return usedArtists.indexOf(item) < 0;
+      });
+
+      $.each(unusedArtists, function(index, artist) {
         $("<button/>", { type: "button", text: artist })
           .addClass("artist-name btn btn-mini btn-primary")
           .prepend("<i class='icon-white icon-plus-sign'></i> ")
