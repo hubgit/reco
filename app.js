@@ -69,7 +69,7 @@ $(function() {
         format: "json",
         api_key: echonest_key,
         variety: 1,
-        results: 15,
+        results: 25,
         type: "artist-radio",
         bucket: ["id:spotify-WW","tracks"],
         artist: artistNames
