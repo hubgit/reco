@@ -43,6 +43,8 @@ $(function() {
       event.preventDefault();
     }
 
+    $("#playlist,#suggestions").empty();
+
     $("#input").addClass("has-artists");
 
     var inputs = $("input[name=artist]");
@@ -52,11 +54,12 @@ $(function() {
     var artistNames = getArtistNames();
 
     if (!artistNames.length){
+      history.pushState(null, "ReCo", "./");
       inputs.eq(0).css("outline-color", "red").focus();
       return false;
     }
 
-    $("#playlist").empty().append(loading);
+    $("#playlist").append(loading);
 
     $.ajax({
       type: "GET",
