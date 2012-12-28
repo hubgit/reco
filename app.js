@@ -28,7 +28,7 @@ $(function() {
   var getArtistNames = function() {
     var artistNames = [];
 
-    $("#input input[name=artist]").each(function(i){
+    $("#input input[name=artist][type=hidden]").each(function(i){
       var artistName = $(this).val();
       if (artistName){
         artistNames.push(artistName);
@@ -68,7 +68,8 @@ $(function() {
         results: 25,
         type: "artist-radio",
         bucket: ["id:spotify-WW","tracks"],
-        artist: artistNames
+        artist: artistNames,
+        distribution: "wandering"
       },
       datatype: "json",
       success: playlistLoaded,
@@ -175,13 +176,14 @@ $(function() {
     .suggest({ filter: "(all type:/music/artist)" })
     .bind("fb-select", function(event, selected) {
       addArtist(selected.name);
-      $("#add").val(null);
+      $("#add").val(null).blur();
     });
 
   $("#input").on("submit", function(event) {
     event.preventDefault();
     addArtist($("#add").val());
   });
+
   $("#suggestions").on("click", ".artist-name", addSuggestion);
   $("#input").on("click", ".remove-artist", removeArtist);
 
