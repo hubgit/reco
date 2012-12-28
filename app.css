@@ -44,24 +44,27 @@ p.description {
 	width:20em
 }
 
-#artists .artist-name {
+#suggestions .artist-name {
 	margin: 0 5px 5px 0;
 }
 
-#artists {
+#suggestions {
 	margin-bottom: 20px;
 }
 
-#artists, #generate-button, #reset-button {
+#suggestions, #generate-button, #reset-button {
 	display: none;
 }
 
 .remove-artist {
-	margin-bottom: 10px;
-	margin-left: 10px;
+	margin-right: 10px;
 }
 
-.has-playlist #artists {
+.artist {
+	margin: 5px 0;
+}
+
+.has-playlist #suggestions {
 	display: block;
 }
 

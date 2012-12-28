@@ -22,14 +22,20 @@
 
 		<p class="description">Create a Spotify playlist of related artists.</p>
 
-		<form id="input">
-			<button type="button" class="btn btn-primary" id="add-button"><i class="icon-white icon-plus-sign"></i> Add an artist</button>
+		<form id="input" class="form-horizontal">
+			<div id="artists"></div>
 
-			<button type="submit" class="btn btn-success" id="generate-button">Generate Playlist</button>
-			<a href="./" class="btn btn-warning" id="reset-button">Reset</a>
+			<div>
+				<input type="text" id="add" name="artist">
+				<button type="submit" class="btn btn-success" id="add-button"><i class="icon-white icon-plus-sign"></i> Add</button>
+			</div>
+
+			<!--<div>
+				<a href="./" class="btn btn-warning" id="reset-button">Reset</a>
+			</div>-->
 		</form>
 
-		<div id="artists"></div>
+		<div id="suggestions"></div>
 		<div id="playlist"></div>
 
 		<div id="colophon">

@@ -2,34 +2,27 @@ $(function() {
   var echonest_key = "D3JK5N3NLFII4K3HF";
   var loading = $("<div class='loading'>Generating&hellip; <img src='images/spinner.gif'></div>");
 
-  var addButtonClicked = function(event) {
-    event.preventDefault();
-    addArtistInput(true);
-  };
-
-  var addArtistInput = function(focus){
-    if ($("#input [name=artist]").length === 5) {
+  var addArtist = function(artist) {
+    if ($("#input [name=artist]").length === 6) {
       $("#input [name=artist]:first").closest("div").remove();
     }
 
-    var input = $("<input/>", { type: "text", name: "artist" })
-      .insertBefore("#add-button")
-      .suggest({ filter: "(all type:/music/artist)" })
-      .bind("fb-select", function() {
-        generatePlaylist();
-      })
-      .wrap("<div></div>");
-
-    if (focus) {
-        input.focus();
-    }
+    var input = $("<input/>", { type: "hidden", name: "artist" }).val(artist);
 
     var remove = $("<button/>", { type: "button" })
-      .addClass("remove-artist btn btn-danger")
-      .append("<i class='icon-white icon-minus-sign'></i>")
-      .insertAfter(input);
+      .addClass("remove-artist btn btn-danger btn-mini")
+      .append("<i class='icon-white icon-minus-sign'></i>");
 
-    return input;
+    $("<div/>").text(artist).addClass("artist").append(input).prepend(remove).appendTo("#artists");
+
+    generatePlaylist();
+  };
+
+  var addSuggestion = function(event) {
+    event.preventDefault();
+
+    var artist = $.trim($(this).text());
+    addArtist(artist);
   };
 
   var getArtistNames = function() {
@@ -59,7 +52,6 @@ $(function() {
     var artistNames = getArtistNames();
 
     if (!artistNames.length){
-      alert("Enter some artist names first!");
       inputs.eq(0).css("outline-color", "red").focus();
       return false;
     }
@@ -119,7 +111,7 @@ $(function() {
       $("<iframe/>", { src: "https://embed.spotify.com/?uri=spotify:trackset:ReCo:" + trackSet, frameborder: "0", allowtransparency: "true", height: 400, width: 320 }).appendTo("#playlist");
     }
 
-    $("#artists").empty();
+    $("#suggestions").empty();
 
     if (artists.length) {
       var uniqueArtists = artists.filter(function(item, index){
@@ -136,27 +128,18 @@ $(function() {
         $("<button/>", { type: "button", text: artist })
           .addClass("artist-name btn btn-mini btn-primary")
           .prepend("<i class='icon-white icon-plus-sign'></i> ")
-          .appendTo("#artists");
+          .appendTo("#suggestions");
       });
 
-      $("#artists").show();
+      $("#suggestions").show();
     }
-  };
-
-  var addArtist = function(event) {
-    event.preventDefault();
-
-    var artist = $.trim($(this).text());
-    addArtistInput().val(artist);
-
-    $("#input").submit();
   };
 
   var removeArtist = function(event) {
     event.preventDefault();
 
     $(this).closest("div").remove();
-    $("#input").submit();
+    generatePlaylist();
   };
 
   var parseQueryString = function() {
@@ -167,29 +150,41 @@ $(function() {
     })
   };
 
+  var readQuery = function() {
+    var artists = [];
+
+    $.each(parseQueryString(), function(index, item) {
+      if (item[0] == "artist") {
+        var artist = $.trim(item[1]);
+        addArtist(artist);
+        artists.push(artist);
+      }
+    });
+
+    if (artists.length){
+      generatePlaylist();
+    }
+  };
+
   $.ajaxSetup({ cache: true });
 
-  $("#input").on("keyup", "[name=artist]", function(event) {
-    $("#input").addClass("has-artists");
-  });
+  $("#add")
+    .on("keyup", function(event) {
+      $("#input").addClass("has-artists"); // TODO: read artists
+    })
+    .suggest({ filter: "(all type:/music/artist)" })
+    .bind("fb-select", function(event, selected) {
+      addArtist(selected.name);
+      $("#add").val(null);
+    });
 
-  $("#input").on("submit", generatePlaylist);
-  $("#add-button").on("click", addButtonClicked);
-  $("#artists").on("click", ".artist-name", addArtist);
+  $("#input").on("submit", function(event) {
+    event.preventDefault();
+    addArtist($("#add").val());
+  });
+  $("#suggestions").on("click", ".artist-name", addSuggestion);
   $("#input").on("click", ".remove-artist", removeArtist);
 
-  var artists = [];
-
-  $.each(parseQueryString(), function(index, item) {
-    if (item[0] == "artist") {
-      var artist = $.trim(item[1]);
-      addArtistInput().val(artist);
-      artists.push(artist);
-    }
-  });
-
-  if (artists.length){
-    generatePlaylist();
-  }
+  readQuery();
 });
 
