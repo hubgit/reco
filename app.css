@@ -49,7 +49,7 @@ p.description {
 }
 
 #suggestions {
-	margin-bottom: 20px;
+	margin: 40px 0 20px;
 }
 
 #suggestions, #generate-button, #reset-button {

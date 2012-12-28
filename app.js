@@ -84,6 +84,8 @@ $(function() {
     var url = window.location.href.replace(/\?.+/, "") + "?" + $.param({ artist: artistNames }, true);
     history.pushState(null, document.title, url);
 
+    $("#add").focus();
+
     return false;
   };
 
