@@ -96,9 +96,9 @@ $(function() {
     $("#open-station").remove();
     
     $("<a/>", { href: station, id: "open-station", text: "Open station in Tomahawk" })
-      .addClass("btn btn-success")
+      .addClass("btn btn-success btn-mini")
       .prepend("<i class='icon-step-forward icon-white'/>")
-      .appendTo("#input");
+      .appendTo("h1");
 
     return false;
   };
