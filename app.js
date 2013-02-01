@@ -85,6 +85,20 @@ $(function() {
     history.pushState(null, document.title, url);
 
     $("#add").focus();
+    
+    station = "tomahawk://station/create/?type=echonest&title=";
+    station += encodeURIComponent(artistNames[0]);
+    if (artistNames.length > 1) station += "+et+al";
+    artistNames.forEach(function(artistName) {
+      station += "&artist=" + encodeURIComponent(artistName);
+    });
+    
+    $("#open-station").remove();
+    
+    $("<a/>", { href: station, id: "open-station", text: "Open station in Tomahawk" })
+      .addClass("btn btn-success")
+      .prepend("<i class='icon-step-forward icon-white'/>")
+      .appendTo("#input");
 
     return false;
   };
