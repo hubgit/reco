@@ -10,8 +10,8 @@ $(function() {
     var input = $("<input/>", { type: "hidden", name: "artist" }).val(artist);
 
     var remove = $("<button/>", { type: "button" })
-      .addClass("remove-artist btn btn-danger btn-mini")
-      .append("<i class='icon-white icon-minus-sign'></i>");
+      .addClass("remove-artist btn btn-danger btn-small btn-icon")
+      .append("<i class='glyphicon glyphicon-minus-sign'></i>");
 
     $("<div/>").text(artist).addClass("artist").append(input).prepend(remove).appendTo("#artists");
 
@@ -85,19 +85,19 @@ $(function() {
     history.pushState(null, document.title, url);
 
     $("#add").focus();
-    
+
     station = "tomahawk://station/create/?type=echonest&title=";
     station += encodeURIComponent(artistNames[0]);
     if (artistNames.length > 1) station += "+et+al";
     artistNames.forEach(function(artistName) {
       station += "&artist=" + encodeURIComponent(artistName);
     });
-    
+
     $("#open-station").remove();
-    
+
     $("<a/>", { href: station, id: "open-station", text: "Open station in Tomahawk" })
-      .addClass("btn btn-success btn-mini")
-      .prepend("<i class='icon-step-forward icon-white'/>")
+      .addClass("btn btn-success btn-small")
+      .prepend("<i class='glyphicon glyphicon-step-forward'/>")
       .appendTo("h1");
 
     return false;
@@ -146,8 +146,8 @@ $(function() {
 
       $.each(unusedArtists, function(index, artist) {
         $("<button/>", { type: "button", text: artist })
-          .addClass("artist-name btn btn-mini btn-primary")
-          .prepend("<i class='icon-white icon-plus-sign'></i> ")
+          .addClass("artist-name btn btn-small btn-primary")
+          .prepend("<i class='glyphicon glyphicon-plus-sign'></i> ")
           .appendTo("#suggestions");
       });
 
@@ -192,7 +192,7 @@ $(function() {
     .on("keyup", function(event) {
       $("#input").addClass("has-artists"); // TODO: read artists
     })
-    .suggest({ filter: "(all type:/music/artist)" })
+    .suggest({ filter: "(all type:/music/artist)", key: "AIzaSyCl6_SzcNuWUSacIzQVQR2IpF44xvOqF0o" })
     .bind("fb-select", function(event, selected) {
       addArtist(selected.name);
       $("#add").val(null).blur();

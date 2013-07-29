@@ -1,10 +1,7 @@
 body {
-	font-family:"Droid Sans",sans-serif;
-	background-color:#fff
-}
-
-input {
-	font-family:"Droid Sans",sans-serif
+	font-family:"Droid Sans", sans-serif;
+	padding: 0 20px;
+	width: 420px;
 }
 
 a img {
@@ -12,23 +9,26 @@ a img {
 }
 
 h1 img {
-	vertical-align: top;
+	vertical-align: middle;
 }
 
-.container {
-	margin: 0;
-	width: 410px;
+h1 a {
+	margin-right: 0.5em;
 }
 
 p.description {
 	color:#444;
-	font-size:80%
 }
 
-.hero-unit {
-	padding: 10px 20px;
-	margin: 0;
-	background: transparent;
+.btn .glyphicon {
+	margin-right: 4px;
+	margin-bottom: -2px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.btn.btn-icon .glyphicon {
+	margin-right: 0;
 }
 
 .error {
@@ -38,10 +38,6 @@ p.description {
 
 #default {
 	display:none!important
-}
-
-#input input[name='artist'] {
-	width:20em
 }
 
 #suggestions .artist-name {

@@ -9,44 +9,43 @@
 <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
 
 <link rel="stylesheet" href="//getbootstrap.com/dist/css/bootstrap.css">
+<link rel="stylesheet" href="//glyphicons.getbootstrap.com/css/bootstrap-glyphicons.css">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Sans">
-<link rel="stylesheet" href="//www.gstatic.com/freebase/suggest/4_1/suggest.min.css">
+<link rel="stylesheet" href="//www.gstatic.com/freebase/suggest/4_2/suggest.min.css">
 <link rel="stylesheet" href="app.css">
 
 <link href="images/icon.png" rel="icon" sizes="60x60">
 <link href="images/icon.png" rel="apple-touch-icon">
 
-<div class="container">
-	<div class="hero-unit">
-		<h1><a href="./"><img src="images/icon.png">ReCo</a></h1>
+<h1><a href="./"><img src="images/icon.png">ReCo</a></h1>
 
-		<p class="description">Create a Spotify playlist of related artists.</p>
+<p class="description">Create a Spotify playlist of related artists.</p>
 
-		<form id="input" class="form-horizontal">
-			<div id="artists"></div>
+<form id="input" class="form-horizontal">
+	<div id="artists"></div>
 
-			<div>
-				<input type="text" id="add" name="artist">
-				<button type="submit" class="btn btn-success" id="add-button"><i class="icon-white icon-plus-sign"></i> Add</button>
-			</div>
-
-			<!--<div>
-				<a href="./" class="btn btn-warning" id="reset-button">Reset</a>
-			</div>-->
-		</form>
-
-		<div id="suggestions"></div>
-		<div id="playlist"></div>
-
-		<div id="colophon">
-			<a href="http://the.echonest.com/"><img src="images/echonest-logo.png"></a>
-			<a href="http://spotify.com/"><img src="images/spotify-logo.png"></a>
-			<a href="http://www.freebase.com/"><img src="http://attribution.freebaseapps.com/freebase-attribution.png" alt="Freebase CC-BY"></a>
-		</div>
+	<div class="input-group">
+		<input type="text" id="add" name="artist" class="form-control">
+		<span class="input-group-btn">
+			<button type="submit" class="btn btn-success" id="add-button"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+		</span>
 	</div>
+
+	<!--<div>
+		<a href="./" class="btn btn-warning" id="reset-button">Reset</a>
+	</div>-->
+</form>
+
+<div id="suggestions"></div>
+<div id="playlist"></div>
+
+<div id="colophon">
+	<a href="http://the.echonest.com/"><img src="images/echonest-logo.png"></a>
+	<a href="http://spotify.com/"><img src="images/spotify-logo.png"></a>
+	<a href="http://www.freebase.com/"><img src="http://attribution.freebaseapps.com/freebase-attribution.png" alt="Freebase CC-BY"></a>
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js"></script>
-<script src="//www.gstatic.com/freebase/suggest/4_1/suggest.min.js"></script>
+<script src="//www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
 <script src="app.js"></script>
 
