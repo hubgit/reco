@@ -20,13 +20,6 @@ p.description {
 	color:#444;
 }
 
-.btn .glyphicon {
-	margin-right: 4px;
-	margin-bottom: -2px;
-	vertical-align: middle;
-	display: inline-block;
-}
-
 .btn.btn-icon .glyphicon {
 	margin-right: 0;
 }
