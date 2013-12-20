@@ -10,7 +10,7 @@ $(function() {
     var input = $("<input/>", { type: "hidden", name: "artist" }).val(artist);
 
     var remove = $("<button/>", { type: "button" })
-      .addClass("remove-artist btn btn-danger btn-small btn-icon")
+      .addClass("remove-artist btn btn-danger btn-sm btn-icon")
       .append("<i class='glyphicon glyphicon-minus-sign'></i>");
 
     $("<div/>").text(artist).addClass("artist").append(input).prepend(remove).appendTo("#artists");
@@ -96,7 +96,7 @@ $(function() {
     $("#open-station").remove();
 
     $("<a/>", { href: station, id: "open-station", text: "Open station in Tomahawk" })
-      .addClass("btn btn-success btn-small")
+      .addClass("btn btn-success btn-sm")
       .prepend("<i class='glyphicon glyphicon-step-forward'/>")
       .appendTo("h1");
 
@@ -146,7 +146,7 @@ $(function() {
 
       $.each(unusedArtists, function(index, artist) {
         $("<button/>", { type: "button", text: artist })
-          .addClass("artist-name btn btn-small btn-primary")
+          .addClass("artist-name btn btn-sm btn-primary")
           .prepend("<i class='glyphicon glyphicon-plus-sign'></i> ")
           .appendTo("#suggestions");
       });
