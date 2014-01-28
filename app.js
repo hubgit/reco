@@ -128,7 +128,7 @@ $(function() {
     if (tracks.length) {
       var trackSet = tracks.join(",");
 
-      $("<iframe/>", { src: "https://embed.spotify.com/?uri=spotify:trackset:ReCo:" + trackSet, frameborder: "0", allowtransparency: "true", height: 400, width: 320 }).appendTo("#playlist");
+      $("<iframe/>", { src: "https://embed.spotify.com/?uri=spotify:trackset:ReCo:" + trackSet, frameborder: "0", allowtransparency: "true", height: 600, width: 480 }).appendTo("#playlist");
     }
 
     $("#suggestions").empty();
