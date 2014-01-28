@@ -17,33 +17,35 @@
 <link href="images/icon.png" rel="icon" sizes="60x60">
 <link href="images/icon.png" rel="apple-touch-icon">
 
-<h1><a href="./"><img src="images/icon.png">ReCo</a></h1>
-
-<p class="description">Create a Spotify playlist of related artists.</p>
-
-<form id="input" class="form-horizontal">
-	<div id="artists"></div>
-
-	<div class="input-group">
-		<input type="text" id="add" name="artist" class="form-control">
-		<span class="input-group-btn">
-			<button type="submit" class="btn btn-success" id="add-button"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
-		</span>
+<section>
+	<h1><a href="./"><img src="images/icon.png">ReCo</a></h1>
+	
+	<p class="description">Create a Spotify playlist of related artists.</p>
+	
+	<form id="input" class="form-horizontal">
+		<div id="artists"></div>
+	
+		<div class="input-group">
+			<input type="text" id="add" name="artist" class="form-control">
+			<span class="input-group-btn">
+				<button type="submit" class="btn btn-success" id="add-button"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+			</span>
+		</div>
+	
+		<!--<div>
+			<a href="./" class="btn btn-warning" id="reset-button">Reset</a>
+		</div>-->
+	</form>
+	
+	<div id="colophon">
+		<a href="http://the.echonest.com/"><img src="images/echonest-logo.png"></a>
+		<a href="http://spotify.com/"><img src="images/spotify-logo.png"></a>
+		<a href="http://www.freebase.com/"><img src="http://attribution.freebaseapps.com/freebase-attribution.png" alt="Freebase CC-BY"></a>
 	</div>
+</section>
 
-	<!--<div>
-		<a href="./" class="btn btn-warning" id="reset-button">Reset</a>
-	</div>-->
-</form>
-
-<div id="suggestions"></div>
-<div id="playlist"></div>
-
-<div id="colophon">
-	<a href="http://the.echonest.com/"><img src="images/echonest-logo.png"></a>
-	<a href="http://spotify.com/"><img src="images/spotify-logo.png"></a>
-	<a href="http://www.freebase.com/"><img src="http://attribution.freebaseapps.com/freebase-attribution.png" alt="Freebase CC-BY"></a>
-</div>
+<section id="suggestions"></section>
+<section id="playlist"></section>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
