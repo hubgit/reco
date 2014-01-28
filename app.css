@@ -12,10 +12,6 @@ section {
 	flex: 1;
 }
 
-#playlist {
-	width: 480px;
-}
-
 a img {
 	border:none
 }
