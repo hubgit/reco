@@ -87,3 +87,11 @@ p.description {
 #colophon {
 	margin-top: 10px;
 }
+
+#seeds .bbc {
+	cursor: pointer;
+}
+
+#seeds .bbc:hover {
+	background: #eee;
+}
