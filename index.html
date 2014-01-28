@@ -1,17 +1,11 @@
 <!doctype html>
-
 <meta charset="utf-8">
 <title>ReCo</title>
 
-<meta name="apple-touch-fullscreen" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
-
-<link rel="stylesheet" href="//getbootstrap.com/dist/css/bootstrap.css">
-<link rel="stylesheet" href="//glyphicons.getbootstrap.com/css/bootstrap-glyphicons.css">
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Sans">
-<link rel="stylesheet" href="//www.gstatic.com/freebase/suggest/4_2/suggest.min.css">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans">
+<link rel="stylesheet" href="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.css">
 <link rel="stylesheet" href="app.css">
 
 <link href="images/icon.png" rel="icon" sizes="60x60">
@@ -19,24 +13,21 @@
 
 <section id="start">
 	<h1><a href="./"><img src="images/icon.png">ReCo</a></h1>
-	
+
 	<p class="description">Create a Spotify playlist of related artists.</p>
-	
+
 	<form id="input" class="form-horizontal">
 		<div id="artists"></div>
-	
+
 		<div class="input-group">
 			<input type="text" id="add" name="artist" class="form-control">
+
 			<span class="input-group-btn">
-				<button type="submit" class="btn btn-success" id="add-button"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+				<button type="submit" class="btn btn-success" id="add-button"><i class="fa fa-plus-circle"></i> Add</button>
 			</span>
 		</div>
-	
-		<!--<div>
-			<a href="./" class="btn btn-warning" id="reset-button">Reset</a>
-		</div>-->
 	</form>
-	
+
 	<div id="colophon">
 		<a href="http://the.echonest.com/"><img src="images/echonest-logo.png"></a>
 		<a href="http://spotify.com/"><img src="images/spotify-logo.png"></a>
@@ -45,10 +36,11 @@
 </section>
 
 <section id="suggestions"></section>
+
 <section id="playlist"></section>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
-<script src="//www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
 <script src="app.js"></script>
 

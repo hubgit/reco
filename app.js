@@ -1,211 +1,227 @@
 $(function() {
-  var echonest_key = "D3JK5N3NLFII4K3HF";
-  var loading = $("<div class='loading'>Generating&hellip; <img src='images/spinner.gif'></div>");
+	var echonest_key = 'D3JK5N3NLFII4K3HF';
+	var loading = $('<div class="loading">Generating&hellip; <img src="images/spinner.gif"></div>');
 
-  var addArtist = function(artist) {
-    if ($("#input [name=artist]").length === 6) {
-      $("#input [name=artist]:first").closest("div").remove();
-    }
+	var addArtist = function(artist) {
+		if ($('#input [name=artist]').length === 6) {
+			$('#input [name=artist]:first').closest('div').remove();
+		}
 
-    var input = $("<input/>", { type: "hidden", name: "artist" }).val(artist);
+		var input = $('<input/>', { type: 'hidden', name: 'artist' }).val(artist);
 
-    var remove = $("<button/>", { type: "button" })
-      .addClass("remove-artist btn btn-danger btn-sm btn-icon")
-      .append("<i class='glyphicon glyphicon-minus-sign'></i>");
+		var removeButton = $('<button/>', { type: 'button' })
+			.addClass('remove-artist btn btn-danger btn-sm btn-icon')
+			.append('<i class="fa fa-minus-circle"></i>');
 
-    $("<div/>").text(artist).addClass("artist").append(input).prepend(remove).appendTo("#artists");
+		$('<div/>', {
+			text: artist,
+			class: 'artist'
+		}).append(input).prepend(removeButton).appendTo('#artists');
 
-    generatePlaylist();
-  };
+		generatePlaylist();
+	};
 
-  var addSuggestion = function(event) {
-    event.preventDefault();
+	var addSuggestion = function(event) {
+		event.preventDefault();
 
-    var artist = $.trim($(this).text());
-    addArtist(artist);
-  };
+		var artist = $(this).text().trim();
 
-  var getArtistNames = function() {
-    var artistNames = [];
+		addArtist(artist);
+	};
 
-    $("#input input[name=artist][type=hidden]").each(function(i){
-      var artistName = $(this).val();
-      if (artistName){
-        artistNames.push(artistName);
-      }
-    });
+	var getArtistNames = function() {
+		var artistNames = [];
 
-    return artistNames;
-  };
+		$('#input input[name=artist][type=hidden]').each(function(i){
+			var artistName = $(this).val();
 
-  var generatePlaylist = function(event){
-    if (event) {
-      event.preventDefault();
-    }
+			if (artistName){
+				artistNames.push(artistName);
+			}
+		});
 
-    $("#playlist,#suggestions").empty();
+		return artistNames;
+	};
 
-    $("#input").addClass("has-artists");
+	var generatePlaylist = function(event){
+		if (event) {
+			event.preventDefault();
+		}
 
-    var inputs = $("input[name=artist]");
-    inputs.css("outline-color", "black");
+		$('#playlist,#suggestions').empty();
 
-    var artists = [];
-    var artistNames = getArtistNames();
+		$('#input').addClass('has-artists');
 
-    if (!artistNames.length){
-      history.pushState(null, "ReCo", "./");
-      inputs.eq(0).css("outline-color", "red").focus();
-      return false;
-    }
+		var inputs = $('input[name=artist]').css('outline-color', 'black');
 
-    $("#playlist").append(loading);
+		var artists = [];
+		var artistNames = getArtistNames();
 
-    $.ajax({
-      type: "GET",
-      url: "http://developer.echonest.com/api/v4/playlist/static",
-      data: {
-        format: "json",
-        api_key: echonest_key,
-        variety: 1,
-        results: 25,
-        type: "artist-radio",
-        bucket: ["id:spotify-WW","tracks"],
-        artist: artistNames,
-        distribution: "wandering"
-      },
-      datatype: "json",
-      success: playlistLoaded,
-      traditional: true
-    });
+		if (!artistNames.length){
+			history.pushState(null, 'ReCo', './');
+			inputs.eq(0).css('outline-color', 'red').focus();
 
-    document.title  = "ReCo: " + ((artistNames.length == 1) ? artistNames[0] : artistNames.slice(0, -1).join(", ") + " & " + artistNames.slice(-1));
+			return false;
+		}
 
-    var url = window.location.href.replace(/\?.+/, "") + "?" + $.param({ artist: artistNames }, true);
-    history.pushState(null, document.title, url);
+		$('#playlist').append(loading);
 
-    $("#add").focus();
+		$.ajax({
+			type: 'GET',
+			url: 'http://developer.echonest.com/api/v4/playlist/static',
+			data: {
+				format: 'json',
+				api_key: echonest_key,
+				variety: 1,
+				results: 50,
+				type: 'artist-radio',
+				bucket: ['id:spotify-WW', 'tracks'],
+				artist: artistNames,
+				distribution: 'wandering'
+			},
+			datatype: 'json',
+			success: playlistLoaded,
+			traditional: true
+		});
 
-    station = "tomahawk://station/create/?type=echonest&title=";
-    station += encodeURIComponent(artistNames[0]);
-    if (artistNames.length > 1) station += "+et+al";
-    artistNames.forEach(function(artistName) {
-      station += "&artist=" + encodeURIComponent(artistName);
-    });
+		document.title  = 'ReCo: ' + ((artistNames.length == 1) ? artistNames[0] : artistNames.slice(0, -1).join(', ') + ' & ' + artistNames.slice(-1));
 
-    $("#open-station").remove();
+		var url = window.location.href.replace(/\?.+/, '') + '?' + $.param({ artist: artistNames }, true);
+		history.pushState(null, document.title, url);
 
-    $("<a/>", { href: station, id: "open-station", text: "Open station in Tomahawk" })
-      .addClass("btn btn-success btn-sm")
-      .prepend("<i class='glyphicon glyphicon-step-forward'/>")
-      .appendTo("h1");
+		$('#add').focus();
 
-    return false;
-  };
+		var station = 'tomahawk://station/create/?type=echonest&title=' + encodeURIComponent(artistNames[0]);
 
-  var playlistLoaded = function(data){
-    $("#playlist").empty();
+		if (artistNames.length > 1) {
+			station += '+et+al';
+		}
 
-    if (!data.response.songs.length){
-      $("<li class='error'>No tracks could be recommended using these artists, sorry.</li>").appendTo("#playlist");
-      return false;
-    }
+		artistNames.forEach(function(artistName) {
+			station += '&artist=' + encodeURIComponent(artistName);
+		});
 
-    var tracks = [];
-    var artists = [];
+		$('#open-station').remove();
 
-    $.each(data.response.songs, function(i, item){
-      artists.push(item.artist_name);
+		$('<a/>', { href: station, id: 'open-station', text: 'Open station in Tomahawk' })
+			.addClass('btn btn-success btn-sm')
+			.prepend('<i class="fa fa-step-forward"/>')
+			.appendTo('h1');
 
-      if (!item.tracks.length) return true; // continue
-      var matches = item.tracks[0].foreign_id.match(/^spotify-WW:track:(.+)/);
+		return false;
+	};
 
-      if (matches.length) {
-        tracks.push(matches[1]);
-      }
-    });
+	var playlistLoaded = function(data){
+		$('#playlist').empty();
 
-    if (tracks.length) {
-      var trackSet = tracks.join(",");
+		if (!data.response.songs.length){
+			$('<li class="error">No tracks could be recommended using these artists, sorry.</li>').appendTo('#playlist');
+			return false;
+		}
 
-      $("<iframe/>", { src: "https://embed.spotify.com/?uri=spotify:trackset:ReCo:" + trackSet, frameborder: "0", allowtransparency: "true", height: 600, width: 480 }).appendTo("#playlist");
-    }
+		var tracks = [];
+		var artists = [];
 
-    $("#suggestions").empty();
+		$.each(data.response.songs, function(i, item){
+			artists.push(item.artist_name);
 
-    if (artists.length) {
-      var uniqueArtists = artists.filter(function(item, index){
-          return index == artists.indexOf(item);
-      });
+			if (!item.tracks.length) return true; // continue
+			var matches = item.tracks[0].foreign_id.match(/^spotify-WW:track:(.+)/);
 
-      var usedArtists = getArtistNames();
+			if (matches.length) {
+				tracks.push(matches[1]);
+			}
+		});
 
-      var unusedArtists = uniqueArtists.filter(function(item) {
-        return usedArtists.indexOf(item) < 0;
-      });
+		if (tracks.length) {
+			var trackSet = tracks.join(',');
 
-      $.each(unusedArtists, function(index, artist) {
-        $("<button/>", { type: "button", text: artist })
-          .addClass("artist-name btn btn-sm btn-primary")
-          .prepend("<i class='glyphicon glyphicon-plus-sign'></i> ")
-          .appendTo("#suggestions");
-      });
+			$('<iframe/>', {
+				src: 'https://embed.spotify.com/?uri=spotify:trackset:ReCo:' + trackSet,
+				frameborder: '0',
+				allowtransparency: 'true',
+				height: '100%',
+				width: '100%'
+			}).appendTo('#playlist');
+		}
 
-      $("#suggestions").show();
-    }
-  };
+		$('#suggestions').empty();
 
-  var removeArtist = function(event) {
-    event.preventDefault();
+		if (!artists.length) {
+			return;
+		}
 
-    $(this).closest("div").remove();
-    generatePlaylist();
-  };
+		var uniqueArtists = artists.filter(function(item, index){
+			return index == artists.indexOf(item);
+		});
 
-  var parseQueryString = function() {
-    return location.search.substring(1).split("&").map(function(item) {
-      return item.split("=").map(decodeURIComponent).map(function(text) {
-        return text.replace(/\+/g, " ").replace(/\/$/, "");
-      });
-    })
-  };
+		var usedArtists = getArtistNames();
 
-  var readQuery = function() {
-    var artists = [];
+		var unusedArtists = uniqueArtists.filter(function(item) {
+			return usedArtists.indexOf(item) < 0;
+		});
 
-    $.each(parseQueryString(), function(index, item) {
-      if (item[0] == "artist") {
-        var artist = $.trim(item[1]);
-        addArtist(artist);
-        artists.push(artist);
-      }
-    });
+		$.each(unusedArtists, function(index, artist) {
+			$('<button/>', { type: 'button', text: artist })
+				.addClass('artist-name btn btn-sm btn-primary')
+				.prepend('<i class="fa fa-plus-circle"></i> ')
+				.appendTo('#suggestions');
+		});
 
-    if (artists.length){
-      generatePlaylist();
-    }
-  };
+		$('#suggestions').show();
+	};
 
-  $.ajaxSetup({ cache: true });
+	var removeArtist = function(event) {
+		event.preventDefault();
 
-  $("#add")
-    .on("keyup", function(event) {
-      $("#input").addClass("has-artists"); // TODO: read artists
-    })
-    .suggest({ filter: "(all type:/music/artist)", key: "AIzaSyCl6_SzcNuWUSacIzQVQR2IpF44xvOqF0o" })
-    .bind("fb-select", function(event, selected) {
-      addArtist(selected.name);
-      $("#add").val(null).blur();
-    });
+		$(this).closest('div').remove();
+		generatePlaylist();
+	};
 
-  $("#input").on("submit", function(event) {
-    event.preventDefault();
-    addArtist($("#add").val());
-  });
+	var parseQueryString = function() {
+		return location.search.substring(1).split('&').map(function(item) {
+			return item.split('=').map(decodeURIComponent).map(function(text) {
+				return text.replace(/\+/g, ' ').replace(/\/$/, '');
+			});
+		})
+	};
 
-  $("#suggestions").on("click", ".artist-name", addSuggestion);
-  $("#input").on("click", ".remove-artist", removeArtist);
+	var readQuery = function() {
+		var artists = [];
 
-  readQuery();
+		$.each(parseQueryString(), function(index, item) {
+			if (item[0] == 'artist') {
+				var artist = $.trim(item[1]);
+				addArtist(artist);
+				artists.push(artist);
+			}
+		});
+
+		if (artists.length) {
+			generatePlaylist();
+		}
+	};
+
+	$.ajaxSetup({ cache: true });
+
+	$('#add').on('keyup', function(event) {
+		$('#input').addClass('has-artists'); // TODO: read artists
+	}).suggest({
+		filter: '(all type:/music/artist)',
+		key: 'AIzaSyCl6_SzcNuWUSacIzQVQR2IpF44xvOqF0o'
+	}).bind('fb-select', function(event, selected) {
+		addArtist(selected.name);
+		$('#add').val(null).blur();
+	});
+
+	$('#input').on('submit', function(event) {
+		event.preventDefault();
+		addArtist($('#add').val());
+	});
+
+	$('#suggestions').on('click', '.artist-name', addSuggestion);
+	$('#input').on('click', '.remove-artist', removeArtist);
+
+	readQuery();
 });
 

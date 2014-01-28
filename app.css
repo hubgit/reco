@@ -1,15 +1,29 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
 body {
 	font-family:"Droid Sans", sans-serif;
 	display: flex;
-	flex-flow: row wrap;
 }
 
 section {
-        padding: 0 10px;
+	height: 100%;
 }
 
 #start, #suggestions {
 	flex: 1;
+	padding: 0 10px;
+	min-width: 300px;
+	overflow-y: auto;
+}
+
+#playlist {
+	width: 333px;
 }
 
 a img {
@@ -46,7 +60,7 @@ p.description {
 }
 
 #suggestions {
-	margin: 40px 0 20px;
+	margin: 20px 0;
 }
 
 #suggestions, #generate-button, #reset-button {
@@ -68,4 +82,8 @@ p.description {
 .has-artists #generate-button,
 .has-artists #reset-button {
 	display: inline-block;
+}
+
+#colophon {
+	margin-top: 10px;
 }
