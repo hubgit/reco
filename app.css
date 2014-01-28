@@ -5,8 +5,15 @@ body {
 }
 
 section {
-	flex: 1;
         padding: 0 10px;
+}
+
+#start, #suggestions {
+	flex: 1;
+}
+
+#playlist {
+	width: 480px;
 }
 
 a img {
