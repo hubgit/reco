@@ -208,35 +208,6 @@ $(function() {
 		}
 	};
 
-	var fetchShowArtists = function(event) {
-        event.preventDefault();
-
-        var pid = $(event.target).data('pid');
-
-        $.programmes.get(pid + '/episodes/player').done(function(data) {
-                var pid = data.episodes[0].programme.pid;
-
-                $.programmes.get(pid).done(function(data) {
-                        var pid = data.programme.versions[0].pid;
-
-                        $.programmes.get(pid).done(function(data) {
-                        	var artists = data.version.segment_events.map(function(segment_event) {
-                        		return segment_event.segment.artist;
-                        	});
-
-                        	var uniqueArtists = artists.filter(function(item, index){
-                        		return index == artists.indexOf(item);
-                        	});
-
-                        	uniqueArtists.slice(0, 5).forEach(function(artist) {
-                        		addArtist(artist, true);
-                        	});
-
-                        	generatePlaylist();
-                        });
-                });
-        });
-	};
 
 	$.ajaxSetup({ cache: true });
 
@@ -257,8 +228,6 @@ $(function() {
 
 	$('#suggestions').on('click', '.artist-name', addSuggestion);
 	$('#input').on('click', '.remove-artist', removeArtist);
-
-	$('#seeds').on('click', '.bbc', fetchShowArtists);
 
 	readQuery();
 });
