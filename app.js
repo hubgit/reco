@@ -194,7 +194,7 @@ $(function() {
 		$.each(parseQueryString(), function(index, item) {
 			if (item[0] == 'artist') {
 				var artist = $.trim(item[1]);
-				addArtist(artist);
+				addArtist(artist, true);
 				artists.push(artist);
 			}
 		});
