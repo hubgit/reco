@@ -127,11 +127,14 @@ $(function() {
 		$.each(data.response.songs, function(i, item){
 			artists.push(item.artist_name);
 
-			if (!item.tracks.length) return true; // continue
-			var matches = item.tracks[0].foreign_id.match(/^spotify-WW:track:(.+)/);
-
-			if (matches.length) {
-				tracks.push(matches[1]);
+			var ids = item.tracks.filter(function(track) {
+				return track.catalog == 'spotify' && track.foreign_id.match(/^spotify:track:/);	
+			}).map(function(track) {
+				return track.foreign_id.replace(/^spotify:track:/, '');
+			});
+			
+			if (ids.length) {
+				tracks.push(ids[0]);
 			}
 		});
 
