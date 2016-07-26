@@ -218,7 +218,7 @@ $(function() {
 		$('#input').addClass('has-artists'); // TODO: read artists
 	}).suggest({
 		filter: '(all type:/music/artist)',
-		key: 'AIzaSyCl6_SzcNuWUSacIzQVQR2IpF44xvOqF0o'
+		key: 'AIzaSyAmYfAvDbskHxMxI2_ZLVy-tiLjp2yvpX8'
 	}).bind('fb-select', function(event, selected) {
 		addArtist(selected.name);
 		$('#add').val(null).blur();
